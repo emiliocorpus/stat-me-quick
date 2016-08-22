@@ -9,8 +9,8 @@ const config = {
     'es5-shim/es5-shim',
     'es5-shim/es5-sham',
     'babel-polyfill',
+    'bootstrap-loader',
     './app/bundles/StatMeQuick/startup/StartupApp',
-    'bootstrap-loader', './app'
   ],
 
   output: {
@@ -43,6 +43,8 @@ const config = {
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
+      { test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
+        loader: 'url-loader?limit=100000' }
     ],
   },
 };

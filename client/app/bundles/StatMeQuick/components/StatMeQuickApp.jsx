@@ -19,7 +19,7 @@ export default class StatMeQuickApp extends React.Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="row debugger-green">
         <h3>
           Hello, emilio!
         </h3>
