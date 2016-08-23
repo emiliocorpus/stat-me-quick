@@ -39,7 +39,30 @@ div.head {
 }
 
 // Navigation and UI elements
+input.form-full-width {
+  width:100%;
+}
+span.search-comment {
+  color:#DD6E42;
+}
+
+div.search-ui {
+  background-color:#DAD6D6;
+}
+
 div.navigation-ui-container {
   text-align:center;
   margin:0 auto;
+}
+
+div.result-tray {
+  max-height:400px;
+  overflow-y: scroll;
+}
+
+div.search-result{
+  border-bottom:1px solid black;
+  border-left:1px solid black;
+  border-right:1px solid black;
+  background-color: #DAD6D6;
 }
