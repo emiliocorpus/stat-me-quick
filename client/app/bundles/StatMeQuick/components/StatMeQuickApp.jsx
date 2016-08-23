@@ -2,6 +2,7 @@
 // all your dump component names with Widget.
 
 import React, { PropTypes } from 'react';
+import _ from 'lodash';
 
 // Simple example of a React "dumb" component
 export default class StatMeQuickApp extends React.Component {
@@ -19,12 +20,10 @@ export default class StatMeQuickApp extends React.Component {
 
   render() {
     return (
-      <div className="row debugger-green">
+      <div className="container-fluid debugger-green">
         <h3>
-          Hello, emilio!
+          Hello Heroku
         </h3>
-        <hr />
-
       </div>
     );
   }
