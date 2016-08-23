@@ -31,6 +31,10 @@ const config = {
         NODE_ENV: JSON.stringify(nodeEnv),
       },
     }),
+    new webpack.ProvidePlugin({
+         $: "jquery",
+         jQuery: "jquery"
+    })
   ],
   module: {
     loaders: [
@@ -42,6 +46,15 @@ const config = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+      },
+      , 
+      {
+        test: /\.css$/,
+        loaders: ['style', 'css']
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'postcss', 'sass']
       },
       { test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
         loader: 'url-loader?limit=100000' }
