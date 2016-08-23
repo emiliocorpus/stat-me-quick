@@ -7,7 +7,9 @@ export default class NaviAndUI extends React.Component {
 	constructor(props) {
 	  super(props);
 	
-	  this.state = {};
+	  this.state = {
+	  	searchResult: []
+	  };
 	}
 
 	handleSearch(e) {
@@ -23,23 +25,26 @@ export default class NaviAndUI extends React.Component {
 			data: {searchValue: e.target.value },
 		})
 		.done(function(data) {
-			debugger
+
+			this.setState({
+				searchResult: <SearchResult data={data.result} />
+			})
+
 			console.log("success");
-		})
+		}.bind(this))
 		.fail(function(data) {
-			debugger
 			console.log("error");
-		})
+		}.bind(this))
 		.always(function(data) {
-			debugger
 			console.log("complete");
-		});
+		}.bind(this));
 		
 	}
 
 
 
 	render() {
+		const searchResult = this.state.searchResult
 		return (
 			<div className="row navigation-ui-container debugger-blue">
 				<form className="navbar-form navbar-left" role="search" onSubmit={this.handleSearch}>
@@ -47,6 +52,12 @@ export default class NaviAndUI extends React.Component {
 				    <input type="text" ref="search-bar" className="form-control" placeholder="Search" onChange={this.handleChange} />
 				  </div>
 				</form>
+
+				<div className="container-fluid">
+					{searchResult}
+				</div>
+
+
 			</div>
 		)
 	}
