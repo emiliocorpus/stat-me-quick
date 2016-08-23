@@ -16,20 +16,22 @@ export default class NaviAndUI extends React.Component {
 
 	handleChange(e) {
 		e.preventDefault()
-		debugger
 		$.ajax({
-			url: '/path/to/file',
-			type: 'default GET (Other values: POST)',
+			url: '/search',
+			type: 'get',
 			dataType: 'json',
-			data: {param1: 'value1'},
+			data: {searchValue: e.target.value },
 		})
-		.done(function() {
+		.done(function(data) {
+			debugger
 			console.log("success");
 		})
-		.fail(function() {
+		.fail(function(data) {
+			debugger
 			console.log("error");
 		})
-		.always(function() {
+		.always(function(data) {
+			debugger
 			console.log("complete");
 		});
 		
