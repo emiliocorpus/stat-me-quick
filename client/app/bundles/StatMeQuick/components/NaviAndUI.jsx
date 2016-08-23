@@ -7,7 +7,6 @@ export default class NaviAndUI extends React.Component {
 
 	constructor(props) {
 	  super(props);
-
 	
 	  this.state = {
 	  	searchResult: []
@@ -23,26 +22,32 @@ export default class NaviAndUI extends React.Component {
 
 	handleChange(e) {
 		e.preventDefault()
-		$.ajax({
-			url: '/search',
-			type: 'get',
-			dataType: 'json',
-			data: {searchValue: e.target.value },
-		})
-		.done(function(data) {
-			debugger
-			this.setState({
-				searchResult: <SearchResult data={data.result} />
+		if (e.target.value !== "") {
+			$.ajax({
+				url: '/search',
+				type: 'get',
+				dataType: 'json',
+				data: {searchValue: e.target.value },
 			})
-
-			console.log("success");
-		}.bind(this))
-		.fail(function(data) {
-			console.log("error");
-		}.bind(this))
-		.always(function(data) {
-			console.log("complete");
-		}.bind(this));
+			.done(function(data) {
+				this.setState({
+					searchResult: <SearchResult data={data.result} />
+				})
+				console.log("success");
+			}.bind(this))
+			.fail(function(data) {
+				console.log("error");
+			}.bind(this))
+			.always(function(data) {
+				console.log("complete");
+			}.bind(this));
+		}
+		else {
+			this.setState({
+				searchResult:[]
+			})
+		}
+		
 		
 	}
 
@@ -53,15 +58,14 @@ export default class NaviAndUI extends React.Component {
 		return (
 			<div className="row navigation-ui-container debugger-blue">
 				<form className="navbar-form navbar-left" role="search" onSubmit={this.handleSearch}>
-				  <div className="form-group">
+				  <div className="input-group input-group-lg">
 				    <input type="text" ref="search-bar" className="form-control" placeholder="Search" onChange={this.handleChange} />
 				  </div>
 				</form>
 
-				<div className="container-fluid">
+				<div className="container-fluid search-ui">
 					{searchResult}
 				</div>
-
 
 			</div>
 		)
