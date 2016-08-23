@@ -1,15 +1,20 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
+import SearchResult from './SearchResult';
 
 
 export default class NaviAndUI extends React.Component {
 
 	constructor(props) {
 	  super(props);
+
 	
 	  this.state = {
 	  	searchResult: []
 	  };
+
+
+	  this.handleChange = this.handleChange.bind(this)
 	}
 
 	handleSearch(e) {
@@ -25,7 +30,7 @@ export default class NaviAndUI extends React.Component {
 			data: {searchValue: e.target.value },
 		})
 		.done(function(data) {
-
+			debugger
 			this.setState({
 				searchResult: <SearchResult data={data.result} />
 			})
