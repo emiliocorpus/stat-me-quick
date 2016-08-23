@@ -7,6 +7,9 @@ html, body {
   padding:0;
   margin:0;
 }
+body {
+  background-color:#445D6B;
+}
 *, *:before, *:after {
   -webkit-box-sizing: inherit;
   -moz-box-sizing: inherit;
@@ -25,4 +28,18 @@ html, body {
 
 .debugger {
   border:1px solid red;
+}
+
+
+// head
+div.head {
+  color: #FBFBF2;
+  margin:0 auto;
+  text-align:center;
+}
+
+// Navigation and UI elements
+div.navigation-ui-container {
+  text-align:center;
+  margin:0 auto;
 }
