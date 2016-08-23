@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'search/find'
-
-  get 'search/view'
-
   root 'page#index'
+  post '/search' => 'search#find'
+  get '/player/:id' => 'search#view'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
