@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'page#index'
-  post '/search' => 'search#find'
+  get '/search' => 'search#find'
   get '/player/:id' => 'search#view'
 
 
