@@ -14,7 +14,7 @@ export default class SearchResult extends React.Component {
 	createResults() {
 		var searchResults = [];
 		for (var i=0; i < this.props.data.length;i++) {
-			searchResults.push(<Result key={i} data={this.props.data[i]}/>)
+			searchResults.push(<Result key={i} data={this.props.data[i]} transferClickedResult={this.props.transferClickedResult} />)
 		}
 		return searchResults
 	}

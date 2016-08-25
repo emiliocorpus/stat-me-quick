@@ -14,6 +14,7 @@ export default class NaviAndUI extends React.Component {
 
 
 	  this.handleChange = this.handleChange.bind(this)
+	  this.handleClickedResult = this.handleClickedResult.bind(this)
 	}
 
 	handleSearch(e) {
@@ -31,7 +32,7 @@ export default class NaviAndUI extends React.Component {
 			})
 			.done(function(data) {
 				this.setState({
-					searchResult: <SearchResult data={data.result} />
+					searchResult: <SearchResult data={data.result} transferClickedResult={this.handleClickedResult}/>
 				})
 				console.log("success");
 			}.bind(this))
@@ -49,6 +50,11 @@ export default class NaviAndUI extends React.Component {
 		}
 		
 		
+	}
+
+	handleClickedResult(result) {
+		debugger
+
 	}
 
 
