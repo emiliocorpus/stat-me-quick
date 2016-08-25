@@ -1,3 +1,4 @@
+require 'open-uri'
 class SearchController < ApplicationController
   def find
   	search = params["searchValue"]
@@ -12,7 +13,9 @@ class SearchController < ApplicationController
   def view
   	position = parse_position(params["position"])
   	full_name = params["full_name"].gsub!(" ", "%20")
-  	searchUrl = "http://www.foxsports.com/nfl/players?teamId=0&season=2016&position=#{position}&name=#{full_name}"
+  	parse_result("http://www.foxsports.com/nfl/players?teamId=0&season=2016&position=#{position}&name=#{full_name}")
+
+
   	if request.xhr?
         render :json => {:success => "YOU FUCKIND DID IT!" }
   	else
@@ -77,6 +80,16 @@ class SearchController < ApplicationController
   end
 
 
+  def parse_result(initial_load_url)
+  	search_page = Nokogiri::HTML(open(initial_load_url)).css("tbody")
+
+  	binding.pry
+
+  end
+
+
+  page = Nokogiri::HTML(open("http://www.foxsports.com/nfl/players?teamId=1&season=2016&position=0&page=1")).css("tbody")
+  
 
 
 
