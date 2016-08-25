@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'page#index'
   get '/search' => 'search#find'
-  get '/player/:id' => 'search#view'
+  get '/findplayerstats' => 'search#view'
 
 
 

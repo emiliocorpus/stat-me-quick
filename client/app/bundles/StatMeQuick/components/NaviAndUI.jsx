@@ -53,7 +53,21 @@ export default class NaviAndUI extends React.Component {
 	}
 
 	handleClickedResult(result) {
-		debugger
+		$.ajax({
+			url: '/findplayerstats',
+			dataType: 'JSON',
+			data: {position: result.pos, full_name: result.full_name},
+		})
+		.done(function(response) {
+			console.log(response.success);
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
 
 	}
 

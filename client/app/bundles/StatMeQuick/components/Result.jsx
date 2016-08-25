@@ -11,7 +11,6 @@ export default class Result extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault()
-		debugger
 		this.props.transferClickedResult(this.props.data)
 	}
 
