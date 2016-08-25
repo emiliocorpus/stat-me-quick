@@ -16,15 +16,25 @@ while i <35
 
 	  		players.each do |player|
 	  			info = player.css("td")
+	  			link = info[0].elements[0].elements[0].attributes["href"]
 	  			name = info[0].children.children.children.children[0].text.split(", ")
 	  			last_name = name[0]
 	  			first_name = name[1]
 	  			full_name = first_name + " " + last_name
-	  			# team = info.children.children[3].text
+	  			team = info.children.children[3].text
+
+
+
+
 	  			exp = info[4].text
 	  			pos = info[3].text
 	  			school = info.last.children.children.text
-	  			Player.create(full_name: full_name, first_name: first_name, last_name: last_name, pos: pos, exp: exp.to_i, school: school)
+	  			Player.create(full_name: full_name, first_name: first_name, last_name: last_name, pos: pos, exp: exp.to_i, school: school, link: link, team: team)
+
+
+
+
+
 			end
 			current_page +=1
 		end
