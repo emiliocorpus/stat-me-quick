@@ -11,24 +11,16 @@ class SearchController < ApplicationController
   end
 
   def view
-  	position = parse_position(params["position"])
-  	full_name = params["full_name"].gsub!(" ", "%20")
-  	parse_result("http://www.foxsports.com/nfl/players?teamId=0&season=2016&position=#{position}&name=#{full_name}")
-
-
   	if request.xhr?
-        render :json => {:success => "YOU FUCKIND DID IT!" }
+        render :json => {:data => parse_result("http://www.foxsports.com#{params["link"]}") }
   	else
   		redirect_to root_path
  	end
-
-
   end
 
   private
  
   def parse_position(pos)
-
   	case pos
 
 	  	when 'WR'
@@ -76,32 +68,26 @@ class SearchController < ApplicationController
 	  	else 
 	  		pos_id = 0
   	end
-
   end
 
 
   def parse_result(initial_load_url)
-  	search_page = Nokogiri::HTML(open(initial_load_url)).css("tbody")
-
-  	binding.pry
-
+  	player_page = Nokogiri::HTML(open(initial_load_url))
+  	picture_src = player_page.css('img.wisfb_headshotImage').last.attributes["src"].value
+  	quick_bio_nokogiri = player_page.css('table.wisfb_playerData').first.css('tbody').first.css('tr')
+  	quick_bio = []
+  	quick_bio_nokogiri.each do |stat|
+  		quick_bio.push([stat.elements.first.text.downcase, stat.elements.last.text])
+  	end
+  	{"pictureSource": picture_src, "quickBio": quick_bio}
   end
-
-
-  page = Nokogiri::HTML(open("http://www.foxsports.com/nfl/players?teamId=1&season=2016&position=0&page=1")).css("tbody")
-  
-
 
 
 end
 
 
 =begin
-
 	POSITIONS
-		
-		
-
 		wide receiver = 1                 | WR
 		center = 2                        | C
 		tight end = 3                     | TE
@@ -123,10 +109,5 @@ end
 		guard = 19                        | G
 		tackle = 20                       | T
 		long snapper = 21                 | LS    - none
-
-
-
-
-
 =end
 

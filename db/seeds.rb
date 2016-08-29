@@ -22,19 +22,16 @@ while i <35
 	  			first_name = name[1]
 	  			full_name = first_name + " " + last_name
 	  			team = info.children.children[3].text
-
-
-
-
 	  			exp = info[4].text
 	  			pos = info[3].text
+	  			
 	  			school = info.last.children.children.text
 	  			Player.create(full_name: full_name, first_name: first_name, last_name: last_name, pos: pos, exp: exp.to_i, school: school, link: link, team: team)
 
+	  			puts "*"*50
+	  			puts "This is #{full_name} who playes #{pos} for #{team}. His link is http://www.foxsports.com#{link}"
 
-
-
-
+	  			puts "="*50
 			end
 			current_page +=1
 		end

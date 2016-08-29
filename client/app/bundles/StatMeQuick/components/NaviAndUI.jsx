@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import SearchResult from './SearchResult';
-
+import SearchedPlayer from './SearchedPlayer';
 
 export default class NaviAndUI extends React.Component {
 
@@ -9,12 +9,16 @@ export default class NaviAndUI extends React.Component {
 	  super(props);
 	
 	  this.state = {
-	  	searchResult: []
+	  	display: "search",
+	  	searchResult: [],
+	  	searchedPlayer: ""
 	  };
 
 
 	  this.handleChange = this.handleChange.bind(this)
 	  this.handleClickedResult = this.handleClickedResult.bind(this)
+	  this.handleRenderByState = this.handleRenderByState.bind(this)
+	  this.backToSearch = this.backToSearch.bind(this)
 	}
 
 	handleSearch(e) {
@@ -48,34 +52,45 @@ export default class NaviAndUI extends React.Component {
 				searchResult:[]
 			})
 		}
-		
-		
 	}
 
 	handleClickedResult(result) {
 		$.ajax({
 			url: '/findplayerstats',
 			dataType: 'JSON',
-			data: {position: result.pos, full_name: result.full_name},
+			data: {position: result.pos, full_name: result.full_name, link: result.link},
 		})
 		.done(function(response) {
-			console.log(response.success);
-		})
+			console.log("success");
+			debugger
+			this.setState({
+				display: "result",
+				searchResult:[],
+				searchedPlayer: response.data
+			})
+
+		}.bind(this))
 		.fail(function() {
 			console.log("error");
-		})
+		}.bind(this))
 		.always(function() {
 			console.log("complete");
-		});
-		
-
+		}.bind(this));
 	}
 
+	backToSearch(e) {
+		e.preventDefault()
+		this.setState({
+			display: "search",
+			searchedPlayer: ""
+		})
+	}
 
-
-	render() {
-		const searchResult = this.state.searchResult
-		return (
+	handleRenderByState() {
+		var renderValue;
+		if (this.state.display === "search") {
+			const searchResult = this.state.searchResult
+			renderValue = 
 			<div className="row navigation-ui-container debugger-blue">
 				<form className="navbar-form navbar-left" role="search" onSubmit={this.handleSearch}>
 				  <div className="input-group input-group-lg">
@@ -86,9 +101,26 @@ export default class NaviAndUI extends React.Component {
 				<div className="container-fluid search-ui">
 					{searchResult}
 				</div>
-
 			</div>
-		)
+		}
+		else {
+			renderValue = 
+				<div className="row debugger-blue">
+					<div className="back-to-search">
+						<a href="#" onClick={this.backToSearch}> &#8624; <br/> back to search</a>
+					</div>
+					<div className="container-fluid">
+						<div className="row">
+							<SearchedPlayer data={this.state.searchedPlayer} />
+						</div>
+					</div>
+				</div>
+		}
+		return renderValue
+	}
+
+	render() {
+		return this.handleRenderByState()
 	}
 }
 
