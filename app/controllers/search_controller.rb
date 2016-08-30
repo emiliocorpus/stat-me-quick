@@ -12,7 +12,7 @@ class SearchController < ApplicationController
 
   def view
   	if request.xhr?
-        render :json => {:data => parse_result("http://www.foxsports.com#{params["link"]}") }
+        render :json => {:data => parse_result("http://www.foxsports.com#{params["link"]}", params["data"]) }
   	else
   		redirect_to root_path
  	end
@@ -71,7 +71,7 @@ class SearchController < ApplicationController
   end
 
 
-  def parse_result(initial_load_url)
+  def parse_result(initial_load_url, other_data)
   	player_page = Nokogiri::HTML(open(initial_load_url))
   	picture_src = player_page.css('img.wisfb_headshotImage').last.attributes["src"].value
   	quick_bio_nokogiri = player_page.css('table.wisfb_playerData').first.css('tbody').first.css('tr')
@@ -79,7 +79,7 @@ class SearchController < ApplicationController
   	quick_bio_nokogiri.each do |stat|
   		quick_bio.push([stat.elements.first.text.downcase, stat.elements.last.text])
   	end
-  	{"pictureSource": picture_src, "quickBio": quick_bio}
+  	{"fullName": other_data["full_name"], "position": other_data["pos"], "team": other_data["team"],  "pictureSource": picture_src, "quickBio": quick_bio}
   end
 
 

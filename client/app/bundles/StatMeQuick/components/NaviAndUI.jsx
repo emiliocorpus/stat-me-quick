@@ -58,7 +58,7 @@ export default class NaviAndUI extends React.Component {
 		$.ajax({
 			url: '/findplayerstats',
 			dataType: 'JSON',
-			data: {position: result.pos, full_name: result.full_name, link: result.link},
+			data: {data:result, link: result.link},
 		})
 		.done(function(response) {
 			console.log("success");
@@ -122,7 +122,3 @@ export default class NaviAndUI extends React.Component {
 		return this.handleRenderByState()
 	}
 }
-
-
-// things to do,
-// 1. Seed database with names of every player.

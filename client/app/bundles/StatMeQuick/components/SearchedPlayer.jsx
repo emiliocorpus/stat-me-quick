@@ -30,6 +30,7 @@ export default class SearchedPlayer extends React.Component {
 
 	parsePlayerPic() {
 		var playerSource
+		debugger
 		if (this.props.data.pictureSource !== "#") {
 			playerSource = this.props.data.pictureSource
 		}
@@ -44,6 +45,7 @@ export default class SearchedPlayer extends React.Component {
 		switch(e.target.innerHTML) {
 		    case "Quick Bio":
 		        this.setState({
+		        	currenTab: "Quick Bio",
 		        	tabClasses: {
 		        		quickBio: "active",
 		        		seasonSummary: "",
@@ -53,6 +55,7 @@ export default class SearchedPlayer extends React.Component {
 		        break;
 		    case "Season Summary":
 		        this.setState({
+		        	currentTab: "Season Summary",
 		        	tabClasses: {
 		        		quickBio: "",
 		        		seasonSummary: "active",
@@ -62,6 +65,7 @@ export default class SearchedPlayer extends React.Component {
 		        break;
 		    case "Stats":
 		        this.setState({
+		        	currentTabe: "Stats",
 		        	tabClasses: {
 		        		quickBio: "",
 		        		seasonSummary: "",
