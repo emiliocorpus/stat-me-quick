@@ -62,7 +62,6 @@ export default class NaviAndUI extends React.Component {
 		})
 		.done(function(response) {
 			console.log("success");
-			debugger
 			this.setState({
 				display: "result",
 				searchResult:[],

@@ -69,8 +69,31 @@ div.search-result{
 
 
 // Searched Player Styling
+div.player-bio-pic-container, div.stat-content {
+  margin: 0 auto;
+  text-align:center;
+}
+div.stat-content {
+  width:100%;
+}
+table.table-stats {
+  margin:0 auto;
+  text-align:center;
+}
+
+td.col-header {
+  color:white;
+  text-size:30px;
+}
+
+td.col-stat {
+  color:#FF0000;
+  text-size:30px;
+}
+
+
 img.searchedPlayerPic {
   width:300px;
-
 }
+
 
