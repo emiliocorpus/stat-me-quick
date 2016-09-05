@@ -83,6 +83,10 @@ export default class SearchedPlayer extends React.Component {
 			<div className="container-fluid">
 				<div className="row">
 					<div className="col-md-4 player-bio-pic-container">
+
+						<div className="player-name-container">
+							<h3>{this.props.data.fullName} | {this.props.data.position} | {this.props.data.team}</h3>
+						</div>
 						<img src={this.parsePlayerPic()} className="searchedPlayerPic" />
 					</div>
 
