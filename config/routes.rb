@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'page#index'
   get '/search' => 'search#find'
   get '/findplayerstats' => 'search#view'
-
+  get '/moreplayerstats' => 'playerstats#more'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

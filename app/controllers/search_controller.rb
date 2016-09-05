@@ -79,7 +79,7 @@ class SearchController < ApplicationController
   	quick_bio_nokogiri.each do |stat|
   		quick_bio.push([stat.elements.first.text.downcase, stat.elements.last.text])
   	end
-  	{"fullName": other_data["full_name"], "position": other_data["pos"], "team": other_data["team"],  "pictureSource": picture_src, "quickBio": quick_bio, "statsUrl": initial_load_url + "-stats"}
+  	{"fullName": other_data["full_name"], "position": other_data["pos"], "team": other_data["team"],  "pictureSource": picture_src, "quickBio": quick_bio, "url": initial_load_url}
   end
 
 

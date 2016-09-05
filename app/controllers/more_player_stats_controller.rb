@@ -1,2 +1,0 @@
-class MorePlayerStatsController < ApplicationController
-end

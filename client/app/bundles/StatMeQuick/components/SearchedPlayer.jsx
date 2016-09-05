@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import FlipMove from 'react-flip-move';
+import StatCategory from './StatCategory';
 
 
 export default class SearchedPlayer extends React.Component {
@@ -9,11 +10,11 @@ export default class SearchedPlayer extends React.Component {
 	  super(props);
 	
 	  this.state = {
-	  	currentTab: "quickBio",
+	  	currentTab: "Quick Bio",
 	  	tabClasses: {
 	  		quickBio: "active",
-	  		seasonSummary: "",
-	  		stats: "",
+	  		careerSummary: "",
+	  		seasonStats: "",
 	  	}
 	  };
 
@@ -30,7 +31,6 @@ export default class SearchedPlayer extends React.Component {
 
 	parsePlayerPic() {
 		var playerSource
-		debugger
 		if (this.props.data.pictureSource !== "#") {
 			playerSource = this.props.data.pictureSource
 		}
@@ -48,28 +48,28 @@ export default class SearchedPlayer extends React.Component {
 		        	currenTab: "Quick Bio",
 		        	tabClasses: {
 		        		quickBio: "active",
-		        		seasonSummary: "",
-		        		stats: "",
+		        		careerSummary: "",
+		        		seasonStats: "",
 		        	}
 		        })
 		        break;
-		    case "Season Summary":
+		    case "Career Summary":
 		        this.setState({
-		        	currentTab: "Season Summary",
+		        	currentTab: "Career Summary",
 		        	tabClasses: {
 		        		quickBio: "",
-		        		seasonSummary: "active",
-		        		stats: "",
+		        		careerSummary: "active",
+		        		seasonStats: "",
 		        	}
 		        })
 		        break;
-		    case "Stats":
+		    case "Season Stats":
 		        this.setState({
-		        	currentTabe: "Stats",
+		        	currentTabe: "Season Stats",
 		        	tabClasses: {
 		        		quickBio: "",
-		        		seasonSummary: "",
-		        		stats: "active",
+		        		careerSummary: "",
+		        		seasonStats: "active",
 		        	}
 		        })
 		        break;
@@ -93,12 +93,11 @@ export default class SearchedPlayer extends React.Component {
 					<div className="col-md-8">
 						<ul className="nav nav-tabs">
 						  <li role="presentation" className={this.state.tabClasses.quickBio}><a href="#" ref="quickBio" onClick={this.handleTabChange}>Quick Bio</a></li>
-						  <li role="presentation" className={this.state.tabClasses.seasonSummary}><a href="#" ref="seasonSummary" onClick={this.handleTabChange}>Season Summary</a></li>
-						  <li role="presentation" className={this.state.tabClasses.stats}><a href="#" ref="stats" onClick={this.handleTabChange}>Stats</a></li>
+						  <li role="presentation" className={this.state.tabClasses.careerSummary}><a href="#" ref="careerSummary" onClick={this.handleTabChange}>Season Summary</a></li>
+						  <li role="presentation" className={this.state.tabClasses.seasonStats}><a href="#" ref="stats" onClick={this.handleTabChange}>Stats</a></li>
 						</ul>
-						<div className="stat-content debugger-blue">
-							{this.parseQuickBio()}
-						</div>
+						
+						<StatCategory data={this.props.data} currentTab={this.state.currentTab} />
 
 					</div>
 				</div>
