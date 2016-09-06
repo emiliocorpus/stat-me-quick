@@ -38,13 +38,13 @@ export default class NaviAndUI extends React.Component {
 				this.setState({
 					searchResult: <SearchResult data={data.result} transferClickedResult={this.handleClickedResult}/>
 				})
-				console.log("success");
+				// console.log("success");
 			}.bind(this))
 			.fail(function(data) {
-				console.log("error");
+				// console.log("error");
 			}.bind(this))
 			.always(function(data) {
-				console.log("complete");
+				// console.log("complete");
 			}.bind(this));
 		}
 		else {
@@ -61,7 +61,7 @@ export default class NaviAndUI extends React.Component {
 			data: {data:result, link: result.link},
 		})
 		.done(function(response) {
-			console.log("success");
+			// console.log("success");
 			this.setState({
 				display: "result",
 				searchResult:[],
@@ -70,10 +70,10 @@ export default class NaviAndUI extends React.Component {
 
 		}.bind(this))
 		.fail(function() {
-			console.log("error");
+			// console.log("error");
 		}.bind(this))
 		.always(function() {
-			console.log("complete");
+			// console.log("complete");
 		}.bind(this));
 	}
 

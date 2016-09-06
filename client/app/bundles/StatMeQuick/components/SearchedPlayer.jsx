@@ -133,13 +133,13 @@ export default class SearchedPlayer extends React.Component {
 				
 
 			}
-			console.log("success");
+			// console.log("success");
 		}.bind(this))
 		.fail(function(data) {
-			console.log("error");
+			// console.log("error");
 		}.bind(this))
 		.always(function(data) {
-			console.log("complete");
+			// console.log("complete");
 		}.bind(this));
 	}
 

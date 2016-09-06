@@ -10,7 +10,7 @@ html, body {
 }
 body {
   background-color:#2B2D42;
-  zoom:90%;
+  zoom:95%;
 }
 *, *:before, *:after {
   -webkit-box-sizing: inherit;
@@ -85,7 +85,6 @@ div.search-comment {
   color:#DD6E42;
   width:100%;
   font-size:20px;
-  padding:1%;
   background-color:rgba(43,45,66,0.3);
   margin-bottom:15px;
 }
@@ -107,6 +106,7 @@ div.result-tray {
   overflow-y:auto;
   max-height:180px;
   border-radius:25px;
+  padding-bottom:15px;
 }
 
 div.search-result{
@@ -115,7 +115,7 @@ div.search-result{
 }
 
 div.search-result span {
-  font-size:15px;
+  font-size:20px;
 }
 a.result-link:hover {
   color:white;

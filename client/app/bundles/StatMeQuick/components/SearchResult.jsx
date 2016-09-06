@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import FlipMove from 'react-flip-move';
 import Result from './Result';
 
 export default class SearchResult extends React.Component {
