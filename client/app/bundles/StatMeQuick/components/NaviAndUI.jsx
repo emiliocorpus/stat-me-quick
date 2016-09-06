@@ -93,7 +93,7 @@ export default class NaviAndUI extends React.Component {
 			<div className="row navigation-ui-container debugger-blue">
 				<form className="form-horizontal" role="search" onSubmit={this.handleSearch}>
 				  <div className="form-group">
-				    <input type="text" ref="search-bar" className="form-control" placeholder="Search" onChange={this.handleChange} />
+				    <input type="text" ref="search-bar" className="form-control search-form" placeholder="Enter Player Name" onChange={this.handleChange} />
 				  </div>
 				</form>
 

@@ -43,12 +43,12 @@ div.title-container {
   border-radius:25px;
   border:5px solid #EDF2F4;
   padding:5px;
-  width:300px;
+  width:335px;
   margin:0 auto;
 }
 
 div.title-container span {
-  font-size:40px;
+  font-size:50px;
 }
 
 span.title-stat {
@@ -67,8 +67,14 @@ span.title-quick {
 
 // Navigation and UI elements
 input.form-control {
-  width:300px;
+  width:350px;
   margin:0 auto;
+}
+
+input.search-form {
+  font-size:25px;
+  padding:2%;
+  border-radius:40px;
 }
 span.search-comment {
   color:#DD6E42;
@@ -79,6 +85,7 @@ span.search-comment {
 
 div.search-ui {
   background-color:#8D99AE;
+  max-height:220px;
 }
 
 div.navigation-ui-container {
@@ -88,8 +95,8 @@ div.navigation-ui-container {
 }
 
 div.result-tray {
-  max-height:200px;
-  overflow-y: scroll;
+  max-height:180px;
+  overflow-y: auto;
 }
 
 div.search-result{
@@ -107,7 +114,7 @@ div.player-bio-pic-container, div.stat-content {
 }
 div.stat-content {
   width:100%;
-
+  padding-top:25px;
 }
 div.player-name-container h3{
   color: #EDF2F4;
@@ -149,5 +156,13 @@ div.no-content {
   font-size: 20px;
 }
 
+
+div::-webkit-scrollbar {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+div::-webkit-scrollbar-thumb {
+  color:rgba(0, 0, 0, 0.69);
+};
 
 
