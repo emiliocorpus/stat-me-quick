@@ -36,7 +36,7 @@ export default class SearchResult extends React.Component {
 	
 		return (
 			<div className="row ">
-				<span className="search-comment">{searchComment}</span>
+				<div className="search-comment">{searchComment}</div>
 				<div className="container-fluid result-tray">
 						{this.createResults()}
 				</div>

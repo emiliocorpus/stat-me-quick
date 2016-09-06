@@ -218,9 +218,14 @@ export default class SearchedPlayer extends React.Component {
 					<div className="col-md-4 player-bio-pic-container">
 
 						<div className="player-name-container">
-							<h3>{this.props.data.fullName} | {this.props.data.position} | {this.props.data.team}</h3>
+							<div>{this.props.data.fullName} | {this.props.data.position} | {this.props.data.team}</div>
 						</div>
 						<img src={this.parsePlayerPic()} className="searchedPlayerPic" />
+
+						<div className="empty-banner">
+
+
+						</div>
 					</div>
 
 					<div className="col-md-8">

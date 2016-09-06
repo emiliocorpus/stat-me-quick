@@ -16,9 +16,9 @@ export default class Result extends React.Component {
 
 	render() {
 		return (
-			<a href="#" onClick={this.handleClick}>
+			<a href="#" onClick={this.handleClick} className="result-link">
 				<div className="row search-result">
-					<span>{this.props.data.full_name}</span> | <span>{this.props.data.pos}</span> | <span>{this.props.data.exp}</span> | <span>{this.props.data.school}</span>
+					<span>{this.props.data.full_name} | {this.props.data.pos} | {this.props.data.exp} | {this.props.data.team}</span>
 				</div>
 			</a>
 		)
