@@ -58,7 +58,11 @@ export default class SearchedPlayer extends React.Component {
 				if (data.result.successful) {
 					var headers = []
 					for (var i=0;i<data.result.headers.length;i++) {
-						headers.push(<th key={i}>{data.result.headers[i]}</th>)
+						var row = []
+						for (var j=0;j<data.result.headers[i].length;j++) {
+							row.push(<th key={j} colSpan={data.result.headers[i][j].colspan}>{data.result.headers[i][j].text}</th>)
+						}
+						headers.push(<tr key={i}>{row}</tr>)
 					}
 					var body = []
 					for (var i=0;i<data.result.body.length;i++) {
@@ -73,7 +77,7 @@ export default class SearchedPlayer extends React.Component {
 						foot.push(<td key={i}>{data.result.foot[i]}</td>)
 					}
 					var table = <div className="table-responsive"><table className="table-stats table table-bordered table-striped">
-									<thead><tr>{headers}</tr></thead>
+									<thead>{headers}</thead>
 									<tbody>{body}</tbody>
 									<tfoot><tr>{foot}</tr></tfoot>
 								</table></div>
@@ -94,10 +98,11 @@ export default class SearchedPlayer extends React.Component {
 					for (var i=0;i<data.result.headers.length;i++) {
 						var row = []
 						for (var j=0;j<data.result.headers[i].length;j++) {
-							row.push(<th key={j}>{data.result.headers[i][j]}</th>)
+							row.push(<th key={j} colSpan={data.result.headers[i][j].colspan}>{data.result.headers[i][j].text}</th>)
 						}
 						headers.push(<tr key={i}>{row}</tr>)
 					}
+					debugger
 					var body = []
 					for (var i=0;i<data.result.body.length;i++) {
 						var row = []
@@ -219,7 +224,7 @@ export default class SearchedPlayer extends React.Component {
 					</div>
 
 					<div className="col-md-8">
-						<ul className="nav nav-tabs">
+						<ul className="nav nav-justfied nav-tabs">
 						  <li role="presentation" className={this.state.tabClasses.quickBio}><a href="#" ref="quickBio" onClick={this.handleTabChange}>Quick Bio</a></li>
 						  <li role="presentation" className={this.state.tabClasses.careerSummary}><a href="#" ref="careerSummary" onClick={this.handleTabChange}>Career Summary</a></li>
 						  <li role="presentation" className={this.state.tabClasses.seasonStats}><a href="#" ref="stats" onClick={this.handleTabChange}>Season Stats</a></li>

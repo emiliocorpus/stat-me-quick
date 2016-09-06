@@ -1,3 +1,4 @@
+// https://coolors.co/2b2d42-5d69d8-edf2f4-ef233c-d90429
 html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -9,6 +10,7 @@ html, body {
 }
 body {
   background-color:#2B2D42;
+  zoom:90%;
 }
 *, *:before, *:after {
   -webkit-box-sizing: inherit;
@@ -38,6 +40,7 @@ div.head {
   text-align:center;
   margin-top:80px;
 }
+
 
 div.title-container {
   border-radius:25px;
@@ -141,6 +144,10 @@ tbody {
 thead {
   color:#D90429;
 }
+th {
+  text-align:center;
+  margin:0 auto;
+}
 tfoot {
   background-color:#C2D2EF;
   color:#2B2D42;
@@ -166,3 +173,22 @@ div::-webkit-scrollbar-thumb {
 };
 
 
+
+// footer
+
+div.footer {
+  margin-top:250px;
+  display:table;
+  width:100%;
+  height:100px;
+  bottom:0;
+}
+div.footer-content {
+  display:table-cell;
+  vertical-align:middle;
+  text-align:center;
+  margin: 0 auto;
+  color:#EDF2F4;
+  width:100%;
+  font-size:15px;
+}

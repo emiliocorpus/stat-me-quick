@@ -21,8 +21,18 @@ class PlayerStatsController < ApplicationController
 				page = Nokogiri::HTML(open(params["url"] + "-stats")).css('table.wisfb_standard').first
 				if page
 					headers = []
-					page.css('thead').first.css('th').each do |th|
-						headers.push(th.text)
+					page.css('thead').first.css('tr').each do |tr|
+						row = []
+						tr.css('th').each do |th|
+							if th["colspan"] == nil 
+								colspan = 1
+							else
+								colspan = th['colspan']
+							end
+							item = {text: th.text, colspan: th["colspan"]}
+							row.push(item)
+						end
+						headers.push(row)
 					end
 					body = []
 					page.css('tbody').first.css('tr').each do |tr|
@@ -44,9 +54,14 @@ class PlayerStatsController < ApplicationController
 					page.css('thead').first.css('tr').each do |tr|
 						row = []
 						tr.css('th').each do |th|
-							row.push(th.text)
+							if th["colspan"] == nil 
+								colspan = 1
+							else
+								colspan = th['colspan']
+							end
+							item = {text: th.text, colspan: th["colspan"]}
+							row.push(item)
 						end
-
 						headers.push(row)
 					end
 					body = []
