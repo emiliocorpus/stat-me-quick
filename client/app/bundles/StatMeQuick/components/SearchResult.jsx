@@ -9,6 +9,8 @@ export default class SearchResult extends React.Component {
 	  super(props);
 
 		this.createResults = this.createResults.bind(this)
+
+	
 	}
 
 	createResults() {
@@ -20,6 +22,8 @@ export default class SearchResult extends React.Component {
 	}
 
 
+
+
 	render() {
 		var searchComment;
 		if (this.props.data.length == 1) {
@@ -29,14 +33,13 @@ export default class SearchResult extends React.Component {
 			searchComment = this.props.data.length.toString() + " matches found."
 		}
 
+	
 		return (
 			<div className="row ">
 				<span className="search-comment">{searchComment}</span>
-
 				<div className="container-fluid result-tray">
 						{this.createResults()}
 				</div>
-
 			</div>
 		)
 	}

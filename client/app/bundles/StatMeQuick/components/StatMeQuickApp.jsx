@@ -18,9 +18,10 @@ export default class StatMeQuickApp extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row head debugger-red">
-          <h3>
-            Stat Me Quick
-          </h3>
+          
+          <div className="title-container">
+            <span className="title-stat">Stat</span> <span className="title-me">Me</span> <span className="title-quick">Quick</span>
+          </div>
         </div>
 
         <NaviAndUI />

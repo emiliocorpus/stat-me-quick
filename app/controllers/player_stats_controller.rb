@@ -19,51 +19,60 @@ class PlayerStatsController < ApplicationController
 		case params["tab"]
 			when "Career Summary"
 				page = Nokogiri::HTML(open(params["url"] + "-stats")).css('table.wisfb_standard').first
-				headers = []
-				page.css('thead').first.css('th').each do |th|
-					headers.push(th.text)
-				end
-				body = []
-				page.css('tbody').first.css('tr').each do |tr|
-					row = []
-					tr.css('td').each do |td|
-						row.push(td.text)
+				if page
+					headers = []
+					page.css('thead').first.css('th').each do |th|
+						headers.push(th.text)
 					end
-					body.push(row)
-				end
-				foot = []
-				page.css('tfoot').first.css('tr').first.css('td').each do |td|
-					foot.push(td.text)
+					body = []
+					page.css('tbody').first.css('tr').each do |tr|
+						row = []
+						tr.css('td').each do |td|
+							row.push(td.text)
+						end
+						body.push(row)
+					end
+					foot = []
+					page.css('tfoot').first.css('tr').first.css('td').each do |td|
+						foot.push(td.text)
+					end
 				end
 			when "Season Stats"
 				page = Nokogiri::HTML(open(params["url"] + "-game-log")).css('table.wisfb_standard').first
-				headers = []
-				page.css('thead').first.css('tr').each do |tr|
-					row = []
-					tr.css('th').each do |th|
-						row.push(th.text)
-					end
+				if page
+					headers = []
+					page.css('thead').first.css('tr').each do |tr|
+						row = []
+						tr.css('th').each do |th|
+							row.push(th.text)
+						end
 
-					headers.push(row)
-				end
-				body = []
-				page.css('tbody').first.css('tr').each do |tr|
-					row = []
-					tr.css('td').each do |td|
-						row.push(td.text)
+						headers.push(row)
 					end
-					body.push(row)
+					body = []
+					page.css('tbody').first.css('tr').each do |tr|
+						row = []
+						tr.css('td').each do |td|
+							row.push(td.text)
+						end
+						body.push(row)
+					end
+					foot = []
+					page.css('tfoot').first.css('tr').first.css('td').each do |td|
+						foot.push(td.text)
+					end
+					foot.insert(1,'')
+					foot.insert(2,'')
 				end
-				foot = []
-				page.css('tfoot').first.css('tr').first.css('td').each do |td|
-					foot.push(td.text)
-				end
-				foot.insert(1,'')
-				foot.insert(2,'')
 			else 
 				return
 		end
-		{headers: headers, body: body, foot: foot}
+
+		if page
+			{headers: headers, body: body, foot: foot, successful:true}	
+		else
+			{successful:false}
+		end
 	end
 
 

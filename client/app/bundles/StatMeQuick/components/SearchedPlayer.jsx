@@ -42,8 +42,8 @@ export default class SearchedPlayer extends React.Component {
 		for (var i=0; i <this.props.data.quickBio.length; i++) {
 			tableRows.push(<tr key={i}><td className="col-header">{this.props.data.quickBio[i][0].toUpperCase()}</td><td className="col-stat">{this.props.data.quickBio[i][1]}</td></tr>)
 		}
-		var content = <table className="table-stats"><tbody>{tableRows}</tbody></table>
-		return <StatCategory content={content}/>
+		var content = <table className="table-stats table table-bordered table-striped"><tbody>{tableRows}</tbody></table>
+		return <StatCategory content={content} key="quick-bio"/>
 	}
 
 	getMorePlayerStats() {
@@ -55,60 +55,77 @@ export default class SearchedPlayer extends React.Component {
 		})
 		.done(function(data) {
 			if (this.state.currentTab === "Career Summary") {
-				var headers = []
-				for (var i=0;i<data.result.headers.length;i++) {
-					headers.push(<th key={i}>{data.result.headers[i]}</th>)
-				}
-				var body = []
-				for (var i=0;i<data.result.body.length;i++) {
-					var row = []
-					for (var j=0;j<data.result.body[i].length;j++) {
-						row.push(<td key={j}>{data.result.body[i][j]}</td>)
+				if (data.result.successful) {
+					var headers = []
+					for (var i=0;i<data.result.headers.length;i++) {
+						headers.push(<th key={i}>{data.result.headers[i]}</th>)
 					}
-					body.push(<tr key={i}>{row}</tr>)
+					var body = []
+					for (var i=0;i<data.result.body.length;i++) {
+						var row = []
+						for (var j=0;j<data.result.body[i].length;j++) {
+							row.push(<td key={j}>{data.result.body[i][j]}</td>)
+						}
+						body.push(<tr key={i}>{row}</tr>)
+					}
+					var foot = []	
+					for (var i=0;i<data.result.foot.length;i++) {
+						foot.push(<td key={i}>{data.result.foot[i]}</td>)
+					}
+					var table = <div className="table-responsive"><table className="table-stats table table-bordered table-striped">
+									<thead><tr>{headers}</tr></thead>
+									<tbody>{body}</tbody>
+									<tfoot><tr>{foot}</tr></tfoot>
+								</table></div>
+					this.setState({
+						careerSummaryContent: <StatCategory content={table} key="career-summary"/>
+					})
 				}
-				var foot = []	
-				for (var i=0;i<data.result.foot.length;i++) {
-					foot.push(<td key={i}>{data.result.foot[i]}</td>)
+				else {
+					this.setState({
+						careerSummaryContent: <StatCategory content={false} key="career-summary"/>
+					})
 				}
-				var table = <table className="table-stats">
-								<thead><tr>{headers}</tr></thead>
-								<tbody>{body}</tbody>
-								<tfoot><tr>{foot}</tr></tfoot>
-							</table>
-				this.setState({
-					careerSummaryContent: <StatCategory content={table}/>
-				})
+				
 			}
 			else {
-				var headers = []
-				for (var i=0;i<data.result.headers.length;i++) {
-					var row = []
-					for (var j=0;j<data.result.headers[i].length;j++) {
-						row.push(<th key={j}>{data.result.headers[i][j]}</th>)
+				if (data.result.successful) {
+					var headers = []
+					for (var i=0;i<data.result.headers.length;i++) {
+						var row = []
+						for (var j=0;j<data.result.headers[i].length;j++) {
+							row.push(<th key={j}>{data.result.headers[i][j]}</th>)
+						}
+						headers.push(<tr key={i}>{row}</tr>)
 					}
-					headers.push(<tr key={i}>{row}</tr>)
-				}
-				var body = []
-				for (var i=0;i<data.result.body.length;i++) {
-					var row = []
-					for (var j=0;j<data.result.body[i].length;j++) {
-						row.push(<td key={j}>{data.result.body[i][j]}</td>)
+					var body = []
+					for (var i=0;i<data.result.body.length;i++) {
+						var row = []
+						for (var j=0;j<data.result.body[i].length;j++) {
+							row.push(<td key={j}>{data.result.body[i][j]}</td>)
+						}
+						body.push(<tr key={i}>{row}</tr>)
 					}
-					body.push(<tr key={i}>{row}</tr>)
+					var foot = []	
+					for (var i=0;i<data.result.foot.length;i++) {
+						foot.push(<td key={i}>{data.result.foot[i]}</td>)
+					}
+					var table = <div className="table-responsive"><table className="table-stats table table-bordered table-striped">
+									<thead>{headers}</thead>
+									<tbody>{body}</tbody>
+									<tfoot><tr>{foot}</tr></tfoot>
+								</table></div>
+					this.setState({
+						seasonStatsContent: <StatCategory content={table} key="season-stats"/>
+					})
 				}
-				var foot = []	
-				for (var i=0;i<data.result.foot.length;i++) {
-					foot.push(<td key={i}>{data.result.foot[i]}</td>)
+				else {
+					this.setState({
+						seasonStatsContent: <StatCategory content={false} key="season-stats"/>
+					})
 				}
-				var table = <table className="table-stats">
-								<thead>{headers}</thead>
-								<tbody>{body}</tbody>
-								<tfoot><tr>{foot}</tr></tfoot>
-							</table>
-				this.setState({
-					seasonStatsContent: <StatCategory content={table} />
-				})
+				
+				
 
 			}
 			console.log("success");
@@ -172,11 +189,9 @@ export default class SearchedPlayer extends React.Component {
 				else {
 					content = this.getMorePlayerStats()
 				}
-			    
 			    break;
 			case "Season Stats":
 				if (this.state.seasonStatsContent) {
-					debugger
 					content = this.state.seasonStatsContent
 				}
 				else {
@@ -190,7 +205,7 @@ export default class SearchedPlayer extends React.Component {
 	}
 
 	render() {
-		var content = this.displayContent()
+		var content = [this.displayContent()]
 
 		return (
 			<div className="container-fluid">
@@ -211,7 +226,9 @@ export default class SearchedPlayer extends React.Component {
 						</ul>
 						
 						<div className="stat-content debugger-blue">
-							{content}	
+							<FlipMove enterAnimation="elevator" leaveAnimation="fade" >
+								{content}	
+							</FlipMove>
 						</div>
 
 					</div>
