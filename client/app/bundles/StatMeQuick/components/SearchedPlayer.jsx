@@ -67,26 +67,49 @@ export default class SearchedPlayer extends React.Component {
 					}
 					body.push(<tr key={i}>{row}</tr>)
 				}
-
 				var foot = []	
 				for (var i=0;i<data.result.foot.length;i++) {
 					foot.push(<td key={i}>{data.result.foot[i]}</td>)
 				}
-
 				var table = <table className="table-stats">
 								<thead><tr>{headers}</tr></thead>
 								<tbody>{body}</tbody>
 								<tfoot><tr>{foot}</tr></tfoot>
 							</table>
-
 				this.setState({
 					careerSummaryContent: <StatCategory content={table}/>
 				})
-
-
 			}
 			else {
-				debugger
+				var headers = []
+				for (var i=0;i<data.result.headers.length;i++) {
+					var row = []
+					for (var j=0;j<data.result.headers[i].length;j++) {
+						row.push(<th key={j}>{data.result.headers[i][j]}</th>)
+					}
+					headers.push(<tr key={i}>{row}</tr>)
+				}
+				var body = []
+				for (var i=0;i<data.result.body.length;i++) {
+					var row = []
+					for (var j=0;j<data.result.body[i].length;j++) {
+						row.push(<td key={j}>{data.result.body[i][j]}</td>)
+					}
+					body.push(<tr key={i}>{row}</tr>)
+				}
+				var foot = []	
+				for (var i=0;i<data.result.foot.length;i++) {
+					foot.push(<td key={i}>{data.result.foot[i]}</td>)
+				}
+				var table = <table className="table-stats">
+								<thead>{headers}</thead>
+								<tbody>{body}</tbody>
+								<tfoot><tr>{foot}</tr></tfoot>
+							</table>
+				this.setState({
+					seasonStatsContent: <StatCategory content={table} />
+				})
+
 			}
 			console.log("success");
 		}.bind(this))

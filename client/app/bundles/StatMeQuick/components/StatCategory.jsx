@@ -9,7 +9,7 @@ export default class StatCategory extends React.Component {
 	}
 
 	render() {
-		
+		debugger
 		return (
 			<div className="stat-content debugger-blue">
 				{this.props.content}
